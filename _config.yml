@@ -1,0 +1,36 @@
+highlighter: pygments
+markdown: rdiscount
+rdiscount:
+  extensions: [smart]
+permalink: /:title.html
+paginate: 5
+gems: [jekyll-paginate]
+port: 4000
+safe: true
+url: http://biomadeira.github.io/vitae
+author: Wojciech Szymanski
+
+# edit this section with your information
+# biomadeira.github.io - all contents run on /vitae/
+# for a normal use at the base of the server change it to "/"
+baseurl: /
+title: Wojciech Szymanski's Resume
+name: Wojciech Szymanski
+email: woszymanski@gmail.com
+email_full: mailto:woszymanski@gmail.com
+email_left: woszymanski
+email_right: gmail.com
+website: wszymanski.com
+website_full: https://wszymanski.com/
+github: wojciech-szymanski
+linkedin: wojciech-szymański-75b12529
+tel: +44 7487 633866
+tel_full: tel:+447487633866
+google_maps: 'https://www.google.co.uk/maps/place/16+Carlton+Drive,+London,+SW15+2BD'
+postcode: SW15 2BD
+city: London
+country: United Kingdom
+google_analytics: UA-69300817-1
+
+# needed for travis-ci build
+exclude: [vendor]
