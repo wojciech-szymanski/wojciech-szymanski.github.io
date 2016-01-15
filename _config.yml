@@ -30,7 +30,7 @@ google_maps: 'https://www.google.co.uk/maps/place/16+Carlton+Drive,+London,+SW15
 postcode: SW15 2BD
 city: London
 country: United Kingdom
-google_analytics: UA-69300817-1
+google_analytics: UA-72480040-1
 
 # needed for travis-ci build
 exclude: [vendor]
