@@ -1,0 +1,370 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #333;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    background-color: #fcfcfc;
+}
+
+header {
+    padding: 1.5em 0;
+    margin-bottom: 3em;
+    width: 100%;
+    box-shadow: inset 0 -1px 0 #ddd;
+    position: fixed;
+    background-color: #fff;
+    z-index: 2;
+}
+
+h1 {
+    margin: 0 0 0.75em;
+    font-size: 2em;
+    font-weight: normal;
+    line-height: 1em;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin: 0 0 0.5em;
+    font-weight: normal;
+    line-height: 1em;
+}
+
+h3 {
+    margin: 0 0 0.5em;
+    font-weight: bold;
+    line-height: 1em;
+}
+
+p {
+    padding: 0 0 1em;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00009b;
+    text-decoration: underline;
+}
+
+span.highlight {
+    color: #00009b;
+}
+
+.header-logo {
+    float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header-logo a {
+    padding: 0 0.5em;
+}
+
+.header-logo a:hover {
+    background: #fcfcfc;
+    text-decoration: none;
+}
+
+.site-nav {
+    float: right;
+}
+
+.site-nav ul {
+    list-style: none;  
+}
+
+.site-nav ul li {
+    display: inline-block;
+    padding-left: 2em;
+}
+
+.site-nav ul li a {
+    text-transform: uppercase;
+}
+
+.site-nav ul li a:hover {
+    text-decoration: none;
+    border-bottom: 2px solid;
+}
+
+.site-nav label {
+    display: inline-block;
+    cursor: pointer;
+    text-indent:-9999px;
+    background: url(../img/menu.svg) center no-repeat;
+    width: 1.5em;
+    height: 1.5em;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    -o-transition: background 0.5s;
+    transition: background 0.5s;
+}
+
+.site-nav input[type=checkbox] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.container {
+    padding: 6em 0 0;
+}
+
+.row {
+    margin: 0 0 1em;
+}
+
+.row:before, .row:after {
+    content: '';
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+.column {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+
+.col-3 {
+    width: 25%;
+    padding: 0 1em 1em;
+    float: left;
+}
+
+.about {
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+    text-align: center;
+    padding: 0 4em;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.about .img-circle {
+    border-radius: 50%;
+    padding: 1em;
+}
+
+.about p {
+    font-size: 1.5em;
+}
+
+.projects {
+    text-align: center;
+    margin: 0 0 2em;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s
+}
+
+.item-wrapper {
+    margin: 1em 0 3em;
+    padding: 0 1em;
+    width: 50%;
+    float: left;
+}
+
+.item {
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.item-photo {
+    /*width: 200px;*/
+    margin-bottom: 1em;
+    height: 14em;
+    overflow: hidden;
+}
+
+.item-photo img {
+    vertical-align: middle;
+    height: auto;
+}
+
+.item-content {
+    position: absolute;
+    top: 12em;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    background: #003366;
+    -webkit-transition: top 0.5s;
+    transition: top 0.5s;
+}
+
+.item-content a, .item-content p {
+    color: #fff;
+}
+
+.item-content p {
+    font-size: 0.95em;
+    opacity: 0;
+    -webkit-transition: opacity 1s linear;
+    transistion: opacity 1s linear;
+}
+
+.item-content ul {
+    list-style: none;  
+}
+
+.item-content ul li {
+    display: inline-block;
+    padding-right: 1em;
+}
+
+.item:hover .item-content {
+    top: 0;
+}
+
+.item:hover .item-content p {
+    opacity: 1;
+}
+
+footer {
+    bottom: 0;
+    margin-top: 3em;
+    padding: 1.5em 0;
+    background: #333;
+    color: #fff;
+}
+
+.footer-social {
+    float: right;
+}
+
+.footer-social a {
+    color: #fff;
+    padding: 0 1em;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #ddd;
+    color: #ddd;
+}
+
+.copyright {
+    float: left;
+    font-size: 0.8em;
+}
+
+.copyright a {
+    color: #ddd;
+}
+
+@media screen and (min-width: 769px) {
+
+    .site-nav label {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .site-nav ul {
+        overflow: hidden;
+        position: absolute;
+        max-height: 0;
+        width: 100%;
+        left: 0;
+        top: 4.5em;
+        -webkit-transition: max-height 0.5s;
+        -moz-transition: max-height 0.5s;
+        -o-transition: max-height 0.5s;
+        transition: max-height 0.5s;
+    }
+
+    .site-nav ul li {
+        display: block;
+        box-shadow: inset 0 -1px 0 #888;
+        padding: 1em;
+        background: #fff;
+        text-align: right;
+        opacity: 1;
+    }
+
+    .site-nav label {
+        display: block;
+    }
+
+    .site-nav input[type=checkbox]:checked ~ ul.nav {
+        max-height: 9em;
+    }
+
+    .site-nav input[type=checkbox]:checked+label {
+        background: url(../img/cross.svg) center no-repeat;
+    }
+
+    .item-content p {
+        font-size: 0.8em;
+    }
+
+    .copyright {
+        padding: 1em 0 0;
+    }
+
+    .about {
+        padding: 0 2em;
+    }
+}
+
+@media screen and (max-width: 640px) {
+
+    .item-wrapper {
+        width: 100%;
+    }
+
+
+    .item-content p {
+        font-size: 0.9em;
+    }
+}
