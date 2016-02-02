@@ -1,4 +1,4 @@
-highlighter: pygments
+highlighter: rouge
 markdown: rdiscount
 rdiscount:
   extensions: [smart]
@@ -7,14 +7,16 @@ paginate: 5
 gems: [jekyll-paginate]
 port: 4000
 safe: true
-url: http://biomadeira.github.io/vitae
+url: http://wojciech-szymanski.github.io/
 author: Wojciech Szymanski
+sass:
+  sass_dir: _sass
+  style: compressed
 
 # edit this section with your information
-# biomadeira.github.io - all contents run on /vitae/
 # for a normal use at the base of the server change it to "/"
 baseurl: /
-title: Wojciech Szymanski's Resume
+title: Wojciech Szymanski - Web Developer based in London
 name: Wojciech Szymanski
 email: woszymanski@gmail.com
 email_full: mailto:woszymanski@gmail.com

@@ -1,0 +1,23 @@
+// Basic variables
+$font-family: 'Varela Round', sans-serif;
+$primary-color: #333;
+$background-color: #fcfcfc;
+
+// Other colors
+$white: #fff;
+$light-grey: #888;
+$grey: #ddd;
+$dark-grey: #333;
+$blue: #00009b;
+$dark-blue: #003366;
+
+// Mobile menu transition
+$basic-transition-time: 0.5s;
+$medium-transition-time: 1s;
+$slow-transition-time: 2s;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}

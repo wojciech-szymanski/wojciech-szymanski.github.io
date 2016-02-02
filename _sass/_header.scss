@@ -1,0 +1,93 @@
+@mixin mobile-menu-transtition($time) {
+    -webkit-transition: background $time;
+       -moz-transition: background $time;
+         -o-transition: background $time;
+            transition: background $time;
+}
+
+@mixin mobile-menu-reveal($time) {
+    -webkit-transition: max-height $time;
+       -moz-transition: max-height $time;
+         -o-transition: max-height $time;
+            transition: max-height $time;
+}
+
+.header-logo {
+    float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+    a {
+        padding: 0 0.5em;
+        &:hover {
+            background: $background-color;
+            text-decoration: none;
+        }
+    }
+}
+
+.site-nav {
+    float: right;
+    ul {
+        @include breakpoint(medium) {
+            @include mobile-menu-reveal($basic-transition-time);
+            position: absolute;
+            top: 4.5em;
+            left: 0;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+        }
+        list-style: none;
+    } 
+        
+    li {
+        @include breakpoint(medium) {   
+            padding: 1em;        
+            display: block;
+            background: $white;
+            text-align: right;
+            opacity: 1;
+            box-shadow: inset 0 -1px 0 $light-grey;
+        }
+        display: inline-block;
+        padding-left: 2em;
+    }
+
+    a {
+        text-transform: uppercase;
+        &:hover {
+            text-decoration: none;
+            border-bottom: 2px solid;
+        }
+    }
+
+    label {
+        @include breakpoint(large) {
+            display: none;
+        }
+        @include breakpoint(medium) {
+            display: block;
+        }
+        @include mobile-menu-transtition($basic-transition-time);
+        width: 1.5em;
+        height: 1.5em;
+        display: inline-block;
+        background: url(../img/menu.svg) center no-repeat;
+        text-indent:-9999px;
+        cursor: pointer;
+    }
+
+    input[type=checkbox] {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+
+        &:checked ~ ul.nav {
+            max-height: 9em;
+        }
+
+        &:checked+label {
+            background: url(../img/cross.svg) center no-repeat;
+        }
+    }
+}

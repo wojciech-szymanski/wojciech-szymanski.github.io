@@ -1,0 +1,146 @@
+@mixin content-fadein($time) {
+    -webkit-animation: fadein $time;
+       -moz-animation: fadein $time;
+         -o-animation: fadein $time;
+            animation: fadein $time;
+}
+
+@mixin item-content-slide($time) {
+    -webkit-transition: top $time;
+       -moz-transition: top $time;
+         -o-transition: top $time;
+            transition: top $time;
+}
+
+@mixin item-description-fade($time) {
+    -webkit-transition: opacity $time linear;
+       -moz-transition: opacity $time linear;
+         -o-transition: opacity $time linear;
+            transition: opacity $time linear;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.about {
+    @include breakpoint(medium) {
+        padding: 0 2em;
+    }
+    @include content-fadein($slow-transition-time);
+    text-align: center;
+    padding: 0 4em;
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .img-circle {
+        border-radius: 50%;
+        padding: 1em;
+    }
+}
+
+.projects {
+    @include content-fadein(2s);
+    margin: 0 0 2em;
+    text-align: center;
+}
+
+.item-wrapper {
+    @include breakpoint(small) {
+        width: 100%;
+    }
+    float: left;
+    width: 50%;
+    margin: 1em 0 3em;
+    padding: 0 1em;
+}
+
+.item {
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+
+    &:hover {
+        .item-content {
+            top: 0;
+        }
+
+        p {
+            opacity: 1;
+        }
+    }
+}
+
+.item-photo {
+    height: 14em;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+
+.item-photo img {
+    vertical-align: middle;
+    height: auto;
+}
+
+.item-content {
+    @include item-content-slide($basic-transition-time);
+    position: absolute;
+    top: 12em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    background: $dark-blue;
+
+    a, p {
+        color: $white;
+    }
+
+    p {
+        @include breakpoint(medium) {
+            font-size: 0.7em;
+        }
+        @include breakpoint(small) {
+            font-size: 0.8em;
+        }
+        @include item-description-fade($medium-transition-time);
+        font-size: 0.95em;
+        opacity: 0;
+    }
+
+    ul {
+        list-style: none;  
+    }
+
+    li {
+        display: inline-block;
+        padding-right: 1em;
+    }
+}
