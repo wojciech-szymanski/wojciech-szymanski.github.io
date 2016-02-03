@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% if page.title %}
       <title>{{ page.title }}</title>
@@ -12,8 +12,12 @@
     {% endif %}
 
     <meta name="author" content="{{ site.author }}" />
-    <meta name="description" content="{{ site.description }}">
-    <link rel="favicon" href="{{ site.baseurl }}static/img/favicon.ico">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="keywords" content="javascript,angular,angularjs,node,mongo,mongodb,grunt,git,web developer,fullstack developer,London">
+
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:image" content="{{ site.baseurl }}assets/images/profile.png">
+    <meta property="og:url" content="http://wszymanski.com{% if page.url %}{{ page.url }}{% endif %}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,6 +45,7 @@
 
       </div>
     </main>
+
     <!-- Footer -->
     {% include footer.html %}
 

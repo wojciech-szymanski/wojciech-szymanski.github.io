@@ -12,6 +12,16 @@
             transition: max-height $time;
 }
 
+.site-header {
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 3em;
+    padding: 1.5em 0;
+    background-color: $white;
+    box-shadow: inset 0 -1px 0 $grey;
+}
+
 .header-logo {
     float: left;
     font-size: 1.5em;

@@ -17,6 +17,7 @@ sass:
 # for a normal use at the base of the server change it to "/"
 baseurl: /
 title: Wojciech Szymanski - Web Developer based in London
+description: I specialise in JavaScript and my favourite framework of choice is Angular. I like working with Node and MongoDB as well
 name: Wojciech Szymanski
 email: woszymanski@gmail.com
 email_full: mailto:woszymanski@gmail.com
