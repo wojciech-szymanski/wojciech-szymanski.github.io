@@ -31,3 +31,30 @@
     margin: 0 auto;
     padding: 0 1em;
 }
+
+.col {
+    float: left;
+    padding: 0 1em;
+    margin-bottom: 1em;
+
+    &-2 {
+        @extend .col;
+        @include breakpoint(medium) {
+            width: 50%
+        }
+        @include breakpoint(small) {
+            width: 100%
+        }
+        width: 1 / 3 * 100%;
+    }
+    &-4 {
+        @extend .col;
+        @include breakpoint(medium) {
+            width: 50%
+        }
+        @include breakpoint(small) {
+            width: 100%
+        }
+        width: 2 / 3 * 100%;
+    }
+}

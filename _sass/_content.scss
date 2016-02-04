@@ -53,15 +53,9 @@
         padding: 0 2em;
     }
     @include content-fadein($slow-transition-time);
-    text-align: center;
-    padding: 0 4em;
 
     h1 {
         text-transform: none;
-    }
-
-    p {
-        font-size: 1.5em;
     }
 
     .img-circle {
@@ -150,14 +144,30 @@
     }
 }
 
-.contact-channels {
+.list {
     list-style: none;
+    margin-bottom: 2em;
     li {
         display: inline-block;
         padding: 1em;
     }
+}
+
+.contact-channels {
     a:hover {
         text-decoration: none;
         border-bottom: 2px solid;
+    }
+}
+
+.skills {
+    li {
+        @include breakpoint(medium) {
+            width: 45%;
+        }
+        margin-right: 0.5em;
+        width: 30%;
+        border-bottom: 1px dotted;
+        text-align: center;
     }
 }
