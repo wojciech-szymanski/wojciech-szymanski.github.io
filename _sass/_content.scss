@@ -49,13 +49,11 @@
 }
 
 .about {
-    @include breakpoint(medium) {
-        padding: 0 2em;
-    }
     @include content-fadein($slow-transition-time);
 
     h1 {
         text-transform: none;
+        margin-top: 0;
     }
 
     .img-circle {
@@ -86,14 +84,8 @@
     overflow: hidden;
     text-align: left;
 
-    &:hover {
-        .item-content {
-            top: 0;
-        }
-
-        p {
-            opacity: 1;
-        }
+    a {
+        display: block;
     }
 }
 
@@ -108,7 +100,7 @@
     height: auto;
 }
 
-.item-content {
+.item-content { 
     @include item-content-slide($basic-transition-time);
     position: absolute;
     top: 12em;
@@ -169,5 +161,78 @@
         width: 30%;
         border-bottom: 1px dotted;
         text-align: center;
+    }
+}
+
+.overlay {
+    @include overlay-fadein(2s);
+    position: fixed;
+    top: 4.5em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: $white;
+    background: $dark-grey;
+
+    a {
+        color: $white;
+    }
+
+    &-close {
+        position: absolute;
+        top: 1.5em;
+        right: 2em;
+
+        i {
+            color: white;
+        }
+
+        span {
+            position: absolute;
+            overflow: hidden;
+            height: 0;
+            width: 0;
+        }
+    }
+}
+
+.project-details {
+    @include breakpoint(medium) {
+        padding: 2em;
+    }
+    @include breakpoint(small) {
+        padding: 2em 0;
+    }
+    padding: 2em 4em;
+
+    .action-button {
+        padding: 1em;
+        margin-top: 1em;
+        display: inline-block;
+        background: $grey;
+        color: $dark-grey;
+        border-radius: 2em;
+        border: 0.2em solid $white;
+        background-clip: padding-box;
+
+        &:hover {
+            background: $dark-grey;
+            color: $white;
+            text-decoration: none;
+        }
+    }
+
+    &-skills {
+        margin-bottom: 1em;
+        li {
+            padding-right: 0em;
+            &:after {
+                content: '|';
+                margin-left: 1em;
+            }
+            &:last-child:after {
+                content: '';
+            }
+        }
     }
 }

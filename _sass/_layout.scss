@@ -10,8 +10,13 @@
     }
   }
 
+.hide {
+    display: none;
+}
+
 .container {
-    padding: 6em 0 0;
+    padding: 4.5em 0 0;
+    position: relative;
 }
 
 .row {
@@ -34,7 +39,7 @@
 
 .col {
     float: left;
-    padding: 0 1em;
+    padding: 1em;
     margin-bottom: 1em;
 
     &-2 {
