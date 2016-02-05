@@ -165,7 +165,6 @@
 }
 
 .overlay {
-    @include overlay-fadein(2s);
     position: fixed;
     top: 4.5em;
     left: 0;
