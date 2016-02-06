@@ -12,12 +12,12 @@
     {% endif %}
 
     <meta name="author" content="{{ site.author }}" />
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="description" content="{{ site.description }}">
     <meta name="keywords" content="javascript,angular,angularjs,node,mongo,mongodb,grunt,git,web developer,fullstack developer,London">
 
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
     <meta property="og:image" content="{{ site.baseurl }}assets/images/profile.png">
-    <meta property="og:url" content="http://wszymanski.com{% if page.url %}{{ page.url }}{% endif %}">
+    <meta property="og:url" content="http://wszymanski.com/">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
