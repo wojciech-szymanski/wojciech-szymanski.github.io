@@ -155,24 +155,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 1em;
     background: $pale-red;
 
     a, p {
         color: $pale-yellow;
-        text-shadow: 2px 2px 0px $dark-grey;
     }
 
-    p {
-        @include breakpoint(medium) {
-            font-size: 0.7em;
+    a {
+        padding: 0.5em;
+        &:hover {
+            color: $pale-red;
+            background-color: $pale-yellow;
+            text-decoration: none;
         }
-        @include breakpoint(small) {
-            font-size: 0.8em;
-        }
-        @include item-description-fade($medium-transition-time);
-        font-size: 0.95em;
-        opacity: 0;
     }
 
     ul {
@@ -214,11 +209,14 @@
 }
 
 .overlay {
+    @include item-description-fade($basic-transition-time);
+    opacity: 0;
     position: fixed;
     top: 3.5em;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 0;
+    overflow: hidden;
     color: $white;
     background: $dark-grey;
 
@@ -241,6 +239,11 @@
             height: 0;
             width: 0;
         }
+    }
+
+    &.show {
+        height: 100%;
+        opacity: 1;
     }
 }
 

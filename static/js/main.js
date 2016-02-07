@@ -40,7 +40,7 @@ function openOverlay() {
 	function onClick(content, e) {
 		e.preventDefault();
 		document.getElementsByClassName("project-details")[0].innerHTML = content;
-		document.getElementById("overlay").classList.remove("hide");
+		document.getElementById("overlay").classList.add("show");
 	}
 
 }
@@ -57,7 +57,7 @@ function closeOverlay() {
 
 	close.addEventListener("click", function(e) {
 		e.preventDefault();
-		document.getElementById("overlay").classList.add("hide");
+		document.getElementById("overlay").classList.remove("show");
 	})
 }
 
