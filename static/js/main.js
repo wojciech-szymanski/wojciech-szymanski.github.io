@@ -62,6 +62,63 @@ function closeOverlay() {
 }
 
 /**
+ * @name smoothSroll
+ * @description Provides smooth scrolling behavior to anchor links
+ *
+ * @elem {string} id of the element that needs to be scrolled to 
+ *
+ * @function
+ * @returns {void} 
+ */
+function smoothScroll(elem) {
+	var target_position = document.getElementById(elem).offsetTop;
+	var current_position = window.pageYOffset;
+	var scroll_distance = target_position - current_position;
+	var scroll_to = current_position;
+	var step = Math.round(scroll_distance / 25);
+	var timer = 0;
+
+	// Set timeout function to be used as a closure
+	var setTimeoutClosure = function(leap) {
+		setTimeout(function() {
+			window.scrollTo(0, leap);
+		}, timer * speed);
+	}
+
+	// Scroll directly if the distance to anchor is below 200 pixels
+	if (Math.abs(scroll_distance) < 200) {
+		window.scrollTo(0, target_position);
+		return;
+	}
+
+	// Calculate timeout in milliseconds between each step, fix it to maximum of 20
+	var speed = Math.round(Math.abs(scroll_distance / 100));
+    if (speed >= 20) speed = 20;
+
+    // The case of scrolling down
+	if (step > 0) {
+		while (scroll_to < target_position) {
+			scroll_to += step;
+			if (scroll_to > target_position)
+				scroll_to = target_position;
+			setTimeoutClosure(scroll_to);
+			timer += 1;
+		}
+		return;
+	}
+	
+	// The case of scrolling up
+	while (scroll_to > target_position) {
+		scroll_to += step;
+		if (scroll_to < target_position)
+			scroll_to = target_position;
+		setTimeoutClosure(scroll_to);
+		timer += 1;
+	}
+
+}
+
+/**
  * Main load function
  */
 window.onload = function() {
@@ -79,7 +136,17 @@ window.onload = function() {
 		element.setAttribute("href", "mailto:" + email);
 	});
 
-	// Attach overtlay handlers only when on projects main page
+	// Attach smooth scrolling to menu links
+	parseLink("smooth-scroll", function(element) {
+		element.addEventListener("click", addSmoothScroll);
+
+		function addSmoothScroll(e) {
+			e.preventDefault();
+			smoothScroll(element.getAttribute("href").split("#")[1]);
+		}
+	})
+
+	// Attach overlay handlers only when on projects main page
 	if (document.getElementById("projects")) {
 		openOverlay();
 		closeOverlay();
