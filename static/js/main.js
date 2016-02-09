@@ -144,7 +144,12 @@ window.onload = function() {
 			e.preventDefault();
 			smoothScroll(element.getAttribute("href").split("#")[1]);
 		}
-	})
+	});
+
+	// Attach google tracking event for PDF download
+	parseLink("pdf-download", function(element) {
+		element.addEventListener("click", ga("send", "event", "PDF", "download", element.getAttribute("href")));
+	});
 
 	// Attach overlay handlers only when on projects main page
 	if (document.getElementById("projects")) {
