@@ -32,11 +32,15 @@ a {
     text-decoration: none;
 }
 
+.highlight {
+    color: $pale-red;
+}
+
 a:hover {
     color: $pale-red;
     text-decoration: underline;
-}
 
-.highlight {
-    color: $pale-red;
+    .highlight {
+        color:  $dark-grey;
+    }
 }

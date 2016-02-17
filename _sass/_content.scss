@@ -148,7 +148,7 @@
     height: auto;
 }
 
-.item-content { 
+.item-content {
     @include item-content-slide($basic-transition-time);
     position: absolute;
     top: 12em;
@@ -168,15 +168,6 @@
             background-color: $pale-yellow;
             text-decoration: none;
         }
-    }
-
-    ul {
-        list-style: none;  
-    }
-
-    li {
-        display: inline-block;
-        padding-right: 1em;
     }
 }
 

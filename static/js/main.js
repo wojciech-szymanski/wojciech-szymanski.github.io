@@ -1,159 +1,216 @@
 /**
- * @name parseLink
- * @description Default function for modifying link element
+ * @name $
+ * @description Library for 
  * 
- * @css_class {string} name of the CSS class that needs to be selected
- * @callback {function} callback function to be executed on each matched element
+ * @selector {string} String representing CSS selector used to grab elements from DOM
+ * @context {object} (optional) Element needed to set context and use selector only on its descendants
  *
  * @function
- * @returns {void} 
+ * @returns {object} 
  */
-function parseLink(css_class, callback) {
-	var links = document.getElementsByClassName(css_class);
+window.$ = (function() {
 
-	Array.prototype.forEach.call(links, callback);
-}
+    function Collection(elements) {
+        for (var i = 0; i < elements.length; i++) {
+            this[i] = elements[i];
+        }
+        this.length = elements.length;
+    }
 
-/**
- * @name openOverlay
- * @description Assigns event handler for opening project details in an overlay
- *
- * @function
- * @returns {void} 
- */
-function openOverlay() {
-	var items = document.getElementsByClassName("item");
+    Collection.prototype.map = function(callback) {
+        var results = [];
 
-	Array.prototype.forEach.call(items, processLinks);
+        for (var i = 0; i < this.length; i++) {
+            results.push(callback.call(this, this[i], i));
+        }
 
-	function processLinks(item) {
-		var content = item.getElementsByClassName("item-content")[0].innerHTML;
-		var links = item.getElementsByClassName("open-overlay");
+        return results;
+    };
 
-		Array.prototype.forEach.call(links, addEvent.bind(undefined, content));
-	}
+    Collection.prototype.mapOne = function(callback) {
+        var results = this.map(callback);
 
-	function addEvent(content, link) {
-		link.addEventListener("click", onClick.bind(undefined, content));
-	}
+        return results.length > 1 ? results : results[0];
+    };
 
-	function onClick(content, e) {
-		e.preventDefault();
-		document.getElementsByClassName("project-details")[0].innerHTML = content;
-		document.getElementById("overlay").classList.add("show");
-	}
+    Collection.prototype.attr = function(attr, value) {
+        if (typeof value !== "undefined") {
+            this.map(function(element) {
+                element.setAttribute(attr, value)
+            });
+            return this;
+        } else {
+            return this.mapOne(function(element) {
+                return element.getAttribute(attr);
+            });
+        }
+    };
 
-}
+    Collection.prototype.html = function(value) {
+        if (typeof value !== "undefined") {
+            this.map(function(element) {
+                element.innerHTML = value;
+            });
+            return this;
+        } else {
+            return this.mapOne(function(element) {
+                return element.innerHTML;
+            });
+        }
+    };
 
-/**
- * @name closeOverlay
- * @description Assigns event handler for closing an overlay
- *
- * @function
- * @returns {void} 
- */
-function closeOverlay() {
-	var close = document.getElementsByClassName("overlay-close")[0].getElementsByTagName("a")[0];
+    Collection.prototype.addClass = function(class_name) {
+        this.map(function(element) {
+            element.classList.add(class_name);
+        });
 
-	close.addEventListener("click", function(e) {
-		e.preventDefault();
-		document.getElementById("overlay").classList.remove("show");
-	})
-}
+        return this;
+    };
 
-/**
- * @name smoothSroll
- * @description Provides smooth scrolling behavior to anchor links
- *
- * @elem {string} id of the element that needs to be scrolled to 
- *
- * @function
- * @returns {void} 
- */
-function smoothScroll(elem) {
-	var target_position = document.getElementById(elem).offsetTop;
-	var current_position = window.pageYOffset;
-	var scroll_distance = target_position - current_position;
-	var scroll_to = current_position;
-	var step = Math.round(scroll_distance / 25);
-	var timer = 0;
+    Collection.prototype.removeClass = function(class_name) {
+        this.map(function(element) {
+            element.classList.remove(class_name)
+        });
 
-	// Set timeout function to be used as a closure
-	var setTimeoutClosure = function(leap) {
-		setTimeout(function() {
-			window.scrollTo(0, leap);
-		}, timer * speed);
-	}
+        return this;
+    };
 
-	// Scroll directly if the distance to anchor is below 200 pixels
-	if (Math.abs(scroll_distance) < 200) {
-		window.scrollTo(0, target_position);
-		return;
-	}
+    Collection.prototype.on = function(event, callback) {
+        this.map(function(element) {
+            element.addEventListener(event, callback, false);
+        });
 
-	// Calculate timeout in milliseconds between each step, fix it to maximum of 20
-	var speed = Math.round(Math.abs(scroll_distance / 100));
-    if (speed >= 20) speed = 20;
+        return this;
+    };
 
-    // The case of scrolling down
-	if (step > 0) {
-		while (scroll_to < target_position) {
-			scroll_to += step;
-			if (scroll_to > target_position)
-				scroll_to = target_position;
-			setTimeoutClosure(scroll_to);
-			timer += 1;
-		}
-		return;
-	}
-	
-	// The case of scrolling up
-	while (scroll_to > target_position) {
-		scroll_to += step;
-		if (scroll_to < target_position)
-			scroll_to = target_position;
-		setTimeoutClosure(scroll_to);
-		timer += 1;
-	}
+    Collection.prototype.smoothScroll = function() {
+        this.map(function(element) {
+            var target = element.getAttribute("href").split("#")[1];
 
-}
+            element.addEventListener("click", function(e) {
+                e.preventDefault();
+                smoothScrollHandler(target);
+            });
+        });
+
+        return this;
+
+        function smoothScrollHandler(target) {
+            var target_position = document.getElementById(target);
+            if (typeof target_position === "undefined") {
+                return;
+            }
+
+            target_position = target_position.offsetTop;
+            var current_position = window.pageYOffset;
+            var scroll_distance = target_position - current_position;
+            var scroll_to = current_position;
+            var step = Math.round(scroll_distance / 25);
+            var timer = 0;
+
+            // Set timeout function to be used as a closure
+            var setTimeoutClosure = function(leap) {
+                setTimeout(function() {
+                    window.scrollTo(0, leap);
+                }, timer * speed);
+            }
+
+            // Scroll directly if the distance to anchor is below 200 pixels
+            if (Math.abs(scroll_distance) < 200) {
+                window.scrollTo(0, target_position);
+                return;
+            }
+
+            // Calculate timeout in milliseconds between each step, fix it to maximum of 20
+            var speed = Math.round(Math.abs(scroll_distance / 100));
+            if (speed >= 20) speed = 20;
+
+            // The case of scrolling down
+            if (step > 0) {
+                while (scroll_to < target_position) {
+                    scroll_to += step;
+                    if (scroll_to > target_position)
+                        scroll_to = target_position;
+                    setTimeoutClosure(scroll_to);
+                    timer += 1;
+                }
+                return;
+            }
+            
+            // The case of scrolling up
+            while (scroll_to > target_position) {
+                scroll_to += step;
+                if (scroll_to < target_position)
+                    scroll_to = target_position;
+                setTimeoutClosure(scroll_to);
+                timer += 1;
+            }
+        }
+
+    };
+
+    return function(selector, context) {
+        var elements;
+
+        if (typeof context === "undefined") {
+            context = document;
+        }
+
+        if (typeof selector === "string") {
+            elements = context.querySelectorAll(selector);
+        } else {
+            elements = [];
+            elements.push(selector);
+        }
+
+        return new Collection(elements);
+    }
+})();
 
 /**
  * Main load function
  */
 window.onload = function() {
 
-	// Set external links to open in new window
-	parseLink("external-link", function(element) {
-		element.setAttribute("target", "_blank");
-	});
+    // Set external links to open in a new window
+    $("a.external-link").attr("target", "_blank");
 
-	// Generate mailto link from data fragments
-	parseLink("generate-email", function(element) {
-		var email = element.getAttribute("data-left") + 
-			'@' + element.getAttribute("data-right");
+    // Generate mailto link from data fragments
+    var email_link = $("a.generate-email");
+    email_link.map(function(element) {
+        var email = $(element).attr("data-left") + '@' + $(element).attr("data-right");
+        $(element).attr("href", "mailto:" + email);
+    });
 
-		element.setAttribute("href", "mailto:" + email);
-	});
+    // Attach smooth scrolling to menu links
+    $("a.smooth-scroll").smoothScroll();
 
-	// Attach smooth scrolling to menu links
-	parseLink("smooth-scroll", function(element) {
-		element.addEventListener("click", addSmoothScroll);
+    // // Attach google tracking event for PDF download
+    $("a.pdf-download").on("click", function() {
+        ga("send", "event", "PDF", "download", $(this).attr("href"));
+    });
 
-		function addSmoothScroll(e) {
-			e.preventDefault();
-			smoothScroll(element.getAttribute("href").split("#")[1]);
-		}
-	});
+    // Attach overlay handlers only when on projects main page
+    if ($("#projects").length) {
 
-	// Attach google tracking event for PDF download
-	parseLink("pdf-download", function(element) {
-		element.addEventListener("click", ga("send", "event", "PDF", "download", element.getAttribute("href")));
-	});
+        // Attach onclick on project links to open overlay
+        $(".item").map(function(element) {
+            var content = $(".item-content", element).html();
 
-	// Attach overlay handlers only when on projects main page
-	if (document.getElementById("projects")) {
-		openOverlay();
-		closeOverlay();
-	}
+            $("a.open-overlay", element).map(function(link) {
+
+                $(link).on("click", function(e) {
+                    e.preventDefault();
+                    $(".project-details").html(content);
+                    $("#overlay").addClass("show");
+                });
+            });
+        });
+
+        // Attach event to close overlay
+        $(".overlay-close").on("click", function(e) {
+            e.preventDefault();
+            $("#overlay").removeClass("show");
+        });
+    }
 };
